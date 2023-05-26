@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="auctionCard.html">
+
+    <title>Card web component</title>
+</head>
+
+<body>
+    <script>
+        $(document).ready(function(){
+          $(".dropdown-toggle").dropdown();
+        });
+        </script>
+    <header>
+        <magic-nav></magic-nav>
+    </header>
+
+    <div class="filters">
+        <button class="filter-button active" data-category="all">All</button>
+        <button class="filter-button" data-category="sol">Sol</button>
+        <button class="filter-button" data-category="eth">Eth</button>
+        <button class="filter-button" data-category="btc">Btc</button>
+    </div> 
+    <div class="dropdowns">
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Collection
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item active collection-dropdown" href="#" data-category="all">All</a>
+          <a class="dropdown-item collection-dropdown" href="#" data-category="okay-bears">Okay Bears</a>
+          <a class="dropdown-item collection-dropdown"  href="#"data-category="blockstars">Blockstars</a>
+          <a class="dropdown-item collection-dropdown" href="#"data-category="nakamigos">Nakamigos</a>
+          <a class="dropdown-item collection-dropdown" href="#"data-category="soul-dogs">Soul Dogs</a>
+          <a class="dropdown-item collection-dropdown" href="#"data-category="viktordao">ViktorDAO</a>
+          <a class="dropdown-item collection-dropdown" href="#"data-category="node-monkey">Node Monkey</a>
+          <a class="dropdown-item collection-dropdown" href="#"data-category="mutant-ape">Mutant Ape</a>
+          <a class="dropdown-item collection-dropdown" href="#"data-category="doodles">Doodles</a>
+          <a class="dropdown-item collection-dropdown" href="#"data-category="degods">DeGods</a>
+          <a class="dropdown-item collection-dropdown" href="#"data-category="yoots">yoots</a>
+          <a class="dropdown-item collection-dropdown" href="#"data-category="jomohippo">JOMOhippo</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Price range
+        </button>okay
+        <div class="dropdown-menu"  aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item active" class="price-dropdown"href="#" data-category="all">All</a>
+          <a value="0-100" class="dropdown-item" class="price-dropdown"href="#" >0 - 100</a>
+          <a value="100-200" class="dropdown-item" class="price-dropdown"href="#">100 - 200</a>
+          <a value="w00-500" class="dropdown-item" class="price-dropdown"href="#">200 - 500</a>
+        </div>
+      </div>
+    </div>
+    <auction-card></auction-card>
+
+    <footer>
+        <magic-footer></magic-footer>
+    </footer>
+
+
+    <script type="module" src="auctionCard.js"></script>
+    <script type="module" src="/public/Components/Components.js"></script>
+</body>
+</html>

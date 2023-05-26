@@ -1,0 +1,127 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+#comment {
+
+    width: 90%;
+    background: #FAFAFA;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    padding: 16px 22px;
+    background-color: #120C18;
+    margin: 16px ;
+
+    &_user {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 32px;
+        line-height: 17px;
+        color: white;
+    }
+
+    &_body {
+        padding-top: 24px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &_img {
+        width: 150%;
+        height: auto;
+
+        &_container {
+            width: 10%;
+            height: width;
+            border-radius: 50%;
+            overflow: hidden;
+            object-fit: cover;
+        }
+    }
+
+    &_text {
+        width: 100%;
+        padding: 24px;
+        margin-left: 15px;
+        background: white;
+        border-radius: 8px;
+    }
+
+    &_comment {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 15px;
+        color: #979C9E;
+    }
+
+    &_reactions {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-top: 20px;
+        color: white;
+    }
+
+    &_likes {
+        display: flex;
+        flex-direction: row;
+        color: white;
+    }
+
+    &_number {
+        margin-left: 8px;
+    }
+
+    &_noComment {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 15px;
+        color: white;
+    }
+
+}
+
+@media only screen and (max-width: 768px) {
+    #comment {
+        &_user {
+            font-size: 20px;
+        }
+
+        &_comment {
+            font-size: 14px;
+        }
+
+        &_body {
+            padding-top: 10px;
+        }
+
+        &_text {
+            width: 100%;
+            padding: 8px;
+            margin-left: 15px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        &_img {
+            width: 150%;
+            height: auto;
+    
+            &_container {
+                width: 30%;
+                height: width;
+                border-radius: 50%;
+                overflow: hidden;
+                object-fit: cover;
+            }
+        }
+    }
+
+}
