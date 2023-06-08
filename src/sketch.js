@@ -1,4 +1,3 @@
-console.log('this is the homepage')
 const home = document.querySelector('.home');
 const nftlist = document.querySelector('.nft-list');
 setButtons()
@@ -35,4 +34,3 @@ function goToNftList() {
   home.classList.add('hidden')
   setButtons()
 }
-
