@@ -14,7 +14,6 @@
   background-color: #120C18;
   margin: 16px;
 }
-
 #comment_user {
   font-style: normal;
   font-weight: bold;
@@ -22,7 +21,6 @@
   line-height: 17px;
   color: white;
 }
-
 #comment_body {
   padding-top: 24px;
   display: flex;
@@ -30,21 +28,18 @@
   align-items: center;
   justify-content: center;
 }
-
 #comment_img {
   width: 150%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
 }
-
 #comment_img_container {
   width: 10%;
-  height: 10%;
+  height: width;
   border-radius: 50%;
   overflow: hidden;
-
+  -o-object-fit: cover;
+     object-fit: cover;
 }
-
 #comment_text {
   width: 100%;
   padding: 24px;
@@ -52,7 +47,6 @@
   background: white;
   border-radius: 8px;
 }
-
 #comment_comment {
   font-style: normal;
   font-weight: 500;
@@ -60,7 +54,6 @@
   line-height: 15px;
   color: #979C9E;
 }
-
 #comment_reactions {
   display: flex;
   flex-direction: row;
@@ -68,18 +61,15 @@
   padding-top: 20px;
   color: white;
 }
-
 #comment_likes {
   display: flex;
   flex-direction: row;
   color: white;
   gap: 7px;
 }
-
 #comment_number {
   margin-left: 8px;
 }
-
 #comment_noComment {
   font-style: normal;
   font-weight: 500;
@@ -88,19 +78,24 @@
   color: white;
 }
 
+.input-comment {
+  width: 100%;
+  height: 100%;
+  border: none;
+  resize: none;
+  overflow: hidden;
+}
+
 @media only screen and (max-width: 768px) {
   #comment_user {
     font-size: 20px;
   }
-
   #comment_comment {
     font-size: 14px;
   }
-
   #comment_body {
     padding-top: 10px;
   }
-
   #comment_text {
     width: 100%;
     padding: 8px;
@@ -108,21 +103,16 @@
     background: white;
     border-radius: 8px;
   }
-
   #comment_img {
-    width: 120%;
+    width: 150%;
     height: auto;
-    object-fit: cover;
   }
-
   #comment_img_container {
-    width: 30%;
+    width: 20%;
     height: width;
     border-radius: 50%;
     overflow: hidden;
     -o-object-fit: cover;
-    object-fit: cover;
+       object-fit: cover;
   }
-}
-
-/*# sourceMappingURL=comment.css.map */
+}/*# sourceMappingURL=comment.css.map */

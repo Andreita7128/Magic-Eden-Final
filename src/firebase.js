@@ -1,7 +1,18 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getAuth } from 'firebase/auth';
-import { collection, addDoc } from "firebase/firestore";
+import {
+    initializeApp
+} from "firebase/app";
+import {
+    getFirestore
+} from "firebase/firestore";
+import {
+    getAuth,
+    onAuthStateChanged
+} from 'firebase/auth';
+import {
+    collection,
+    addDoc,
+    getDocs
+} from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDMoTrnEveh71kOKABSkPmTnyYv-YLyPTk",
@@ -18,8 +29,38 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app); // Aquí se agregó la autenticación
 
-export { db, auth };
+export {
+    db,
+    auth
+};
 
+export async function getProducts() {
+    const allNfts = [];
+
+    const querySnapshot = await getDocs(collection(db, "nfts"));
+    querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} => ${doc.data()}`);
+        allNfts.push({
+            ...doc.data(),
+            id: doc.id
+        })
+    });
+
+    return allNfts
+}
+
+export async function addData() {
+    try {
+        const docRef = await addDoc(collection(db, "users"), {
+            first: "Ada",
+            last: "Lovelace",
+            born: 1815
+        });
+        console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+        console.error("Error adding document: ", e);
+    }
+}
 
 
 // async function getData() {

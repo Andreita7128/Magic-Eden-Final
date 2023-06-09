@@ -1,74 +1,37 @@
 class Comment extends HTMLElement {
     constructor() {
-        super()
-        this.pictureprofile = '';
-        this.picture = "";
-        this.username = '';
+        super();
+        this.picture = '';
+        this.name = '';
         this.comment = '';
-        this.likes = '';
+        this.likes;
         this.isChange = false;
         this.counter = null;
         this.icon = null;
     }
 
-    static get observedAttributes() {
-        return [
-            "pictureprofile",
-            "username",
-            "comment",
-            "likes",
-        ]
-    }
-
     connectedCallback() {
+        this.picture = this.getAttribute('picture');
+        this.name = this.getAttribute('name');
+        this.comment = this.getAttribute('comment');
+        this.likes = this.getAttribute('likes');
 
-        if (this.username === '') {
-            console.log("hi");
+
+        if (this.name === '') {
             this.renderEmpty();
         } else {
             this.render()
         }
     }
 
-    attributeChangedCallback(nameAtr, oldValue, newValue) {
-
-        switch (nameAtr) {
-            case "pictureprofile":
-
-                this.pictureprofile = newValue
-
-                break;
-
-            case "username":
-
-                this.username = newValue
-
-                break;
-
-            case "comment":
-
-                this.comment = newValue
-
-                break;
-
-            case "likes":
-
-                this.likes = newValue
-
-                break;
-        }
-
-    }
-
-
     render() {
         this.innerHTML = `
     <link rel="stylesheet" href="../../../public/Components/Comments/comment.css">
     <article id="comment">
-            <p id="comment_user"> ${this.username}</p>
+            <p id="comment_user"> ${this.name}</p>
             <section id="comment_body">
             <div id="comment_img_container">
-                    <img id="comment_img" src=${this.pictureprofile}>
+                    <img id="comment_img" src=${this.picture}>
                 </div>
                 <div id="comment_text">
                     <p id="comment_comment"> ${this.comment} </p>
@@ -86,28 +49,23 @@ class Comment extends HTMLElement {
         this.counter = this.querySelector('#comment_number');
         this.icon = this.querySelector('#like');
 
-        if (localStorage.getItem('comment_number')) {
-            this.counter.textContent = localStorage.getItem('comment_number');
+        if (this.likes) {
+            this.counter.textContent = this.likes;
         }
 
         this.icon.addEventListener('click', () => {
             if (this.isChange) {
                 this.icon.className = 'bi bi-heart';
-                let number = parseInt(this.counter.textContent);
-                number -= 1;
-                this.counter.textContent = number;
-                localStorage.setItem('comment_number', number);
+                this.likes--;
+                this.counter.textContent = this.likes;
                 this.isChange = false;
             } else {
                 this.icon.className = 'bi bi-heart-fill';
-                let number = parseInt(this.counter.textContent);
-                number += 1;
-                this.counter.textContent = number;
-                localStorage.setItem('comment_number', number);
+                this.likes++;
+                this.counter.textContent = this.likes;
                 this.isChange = true;
             }
         });
-
     }
 
     renderEmpty() {
