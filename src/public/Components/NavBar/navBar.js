@@ -16,7 +16,7 @@ class NavBar extends HTMLElement {
             <input type="search" class="inputSearch" placeholder="Search collections and creators">
             <ul>
                 <!---Cada # se le tiene que asignar a la sección-->
-                <li><a class="home-button" href="../../../landing.html">Home</a></li>
+                <li><a class="home-button" href="../../../index.html">Home</a></li>
                 <li><a href="#launchpad">Launchpad</a></li>
                 <li><a href="#auctions">Auctions</a></li>
                 <li><a href="#stats">Stats</a></li>
