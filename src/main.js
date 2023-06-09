@@ -1,6 +1,3 @@
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-import { db } from "./firebase.js";
-import { collection, addDoc } from "firebase/firestore";
 console.log('this is the homepage')
 const home = document.querySelector('.home');
 const nftlist = document.querySelector('.nft-list');
@@ -44,7 +41,10 @@ function goToNftList() {
   setButtons()
 }
 
-// Attach a click event listener to the button
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { db } from "./firebase.js";
+import { collection, addDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const authInstance = getAuth();
 
@@ -52,25 +52,35 @@ const authInstance = getAuth();
 const loginForm = document.getElementById('login-form');
 loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  
+
   const email = document.getElementById('login-email-input').value;
   const password = document.getElementById('login-password-input').value;
-  
+
   signInWithEmailAndPassword(authInstance, email, password)
-  .then((userCredential) => {
+  .then(async (userCredential) => {
     const user = userCredential.user;
     console.log('Usuario autenticado:', user);
-    // Realizar cualquier acción adicional después de iniciar sesión
-    const button = document.getElementById('navigate-button');
-    button.addEventListener('click', () => {
-      // Navigate to the new page
-      window.location.href = 'addNFT.html';
-    });
 
-    })
-    .catch((error) => {
-      console.error('Hay un error', error);
-    });
+    // Obtener el documento del usuario desde Firestore
+    const userDocRef = doc(db, 'users', user.uid);
+    const userDocSnapshot = await getDoc(userDocRef);
+
+    if (userDocSnapshot.exists()) {
+      const userData = userDocSnapshot.data();
+      const role = userData.role;
+
+      if (role === 'usuario') {
+        window.location.href = 'index.html'; // Redirigir a index.html si el rol es usuario
+      } else if (role === 'administrador') {
+        window.location.href = 'addNFT.html'; // Redirigir a addNFT.html si el rol es administrador
+      }
+    } else {
+      console.error('El documento del usuario no existe en Firestore');
+    }
+  })
+  .catch((error) => {
+    console.error('Hay un error', error);
+  });
 });
 
 const registerForm = document.getElementById("register-form");
@@ -99,14 +109,15 @@ registerForm.addEventListener("submit", async (e) => {
       role: role
     };
 
+    // Guarda los datos del usuario en Firestore
+    await setDoc(doc(db, "users", user.uid), userData);
+
     const docRef = await addDoc(collection(db, "users"), userData);
-    
+
     registerForm.reset();
     alert("Cuenta creada exitosamente");
   } catch (error) {
     console.log(error);
   }
 });
-
-
 
