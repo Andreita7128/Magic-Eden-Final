@@ -8,11 +8,6 @@ import {
     getAuth,
     onAuthStateChanged
 } from 'firebase/auth';
-import {
-    collection,
-    addDoc,
-    getDocs
-} from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {

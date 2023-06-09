@@ -1,5 +1,5 @@
 import { collection } from 'firebase/firestore'
-import { getNfts, addNft, addNftWithId } from '/firebase.js'
+import { getProducts, addNft, addNftWithId } from '/firebase.js'
 
 let products = []
 await retrieveNfts()
