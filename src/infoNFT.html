@@ -81,7 +81,7 @@
         function updateProductInfo() {
             const product = products[position];
             const productName = document.querySelector('.product-descripcion h2');
-            productName.innerText = product.name;
+           // productName.innerText = product.name;
             const productCollection = document.querySelector('.product-descripcion h2:last-of-type');
             productCollection.innerText = product.collection;
             const productImg = document.querySelector('.product-img');
@@ -92,27 +92,24 @@
             productDesc.item(2).innerText = product.price;
 
             //Andrea
-            let commentas = document.getElementById("comments")
-            commentas.innerHTML = ""
+            //let commentas = document.getElementById("comments")
+            //commentas.innerHTML = ""
 
-
-            if (product.comments !== 'null') {
-                product.comments.forEach((com) => {
+            /*product.comments.forEach((com) => {
                     commentas.innerHTML += ` 
                     <comments-product pictureprofile="${com.picture}" userName="${com.name}" likes="${com.likes}"
                     comment="${com.comment}"
                     ></comments-product>`
-                })
+
+
+            if (product.comments !== 'null') {
+                renderComments();
+    
             } else {
-                commentas.innerHTML += ` 
+               commentas.innerHTML += ` 
                     <comments-product></comments-product>`
-            }
-
-
-
-
-
-
+                    
+            }*/
 
         }
 
@@ -125,20 +122,20 @@
             updateProductInfo();
         });
 
-        getInfo();
+       // getInfo();
     </script>
 
     <section id="comments">
         <h2>Comentarios</h2>
+        <new-comment></new-comment>
     </section>
 
     <footer>
         <magic-footer></magic-footer>
     </footer>
 
-    <script type="module" src="/public/Components/Components.js"></script>
-
-    <script type="module" src="/comment.js"></script>
+    <script type="module" src="./public/Components/Components.js"></script>
+    <script type="module" src="./infoNFT.js"></script>
 </body>
 
 </html>
