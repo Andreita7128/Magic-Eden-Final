@@ -881,3 +881,21 @@ button {
     transform: translateX(-50%);
     width: 80%;
 }
+
+.btn-shopping {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-top: 40px;
+    width: auto;
+    height: auto;
+    background-color: #E42575;
+    align-self: center;
+    border-radius: 20px;
+    padding: 5px 6%;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
