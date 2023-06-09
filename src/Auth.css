@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Be Vietnam Pro', sans-serif; 
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  #login-container,
+  #register-container {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    margin: 10px;
+  }
+  
+  h2 {
+    text-align: center;
+    font-family: 'Be Vietnam Pro';
+  }
+
+  p {
+    color: #ffffff;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-top: 10px;
+    color: #ffffff;
+  }
+  
+  input[type="email"],
+  input[type="password"],
+  input[type="date"],
+  input[type="file"],
+  select {
+    border-radius: 34px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+  }
+  
+  button {
+    background: #E42575;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    border: 2px solid transparent;
+    font-weight: 800;
+    padding: 5px 25px;
+    border-radius: 34px !important;
+    margin-top: 10px !important;
+  }
+  
+  button:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+  }
+  
+  p {
+    text-align: center;
+  }
+
+  #profile-color-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+  }
+  
+  .profile-color-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+  }
+
+  .profile-color-button.selected {
+    border: 2px solid white;
+  }
