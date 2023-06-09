@@ -1,11 +1,13 @@
 import {
-    getProducts
+    getProducts,
+    shoppingCartCheck
 } from './firebase.js'
 
 
 let nfts = [];
 await retrieveNft();
 renderComments('8r2llpJkw8razkC7bgPv');
+addCart('8r2llpJkw8razkC7bgPv');
 
 async function retrieveNft() {
 
@@ -45,3 +47,11 @@ function renderComments(id) {
 
 }
 
+function addCart(id) {
+    const btn = document.getElementById('shopping-cart');
+    console.log(btn);
+
+    btn.addEventListener('click', async () => {
+        await shoppingCartCheck(id);
+    });
+}

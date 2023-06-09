@@ -2,17 +2,24 @@ import {
     initializeApp
 } from "firebase/app";
 import {
-    getFirestore
+    getFirestore,
+    collection,
+    addDoc,
+    doc,
+    setDoc,
+    getDocs,
+    updateDoc
 } from "firebase/firestore";
 import {
     getAuth,
     onAuthStateChanged
 } from 'firebase/auth';
 import {
-    collection,
-    addDoc,
-    getDocs
-} from "firebase/firestore";
+    getStorage,
+    ref,
+    uploadBytes,
+    getDownloadURL
+} from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDMoTrnEveh71kOKABSkPmTnyYv-YLyPTk",
@@ -27,6 +34,7 @@ const firebaseConfig = {
 // Inicializar Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const storage = getStorage(app)
 const auth = getAuth(app); // Aquí se agregó la autenticación
 
 export {
@@ -50,6 +58,49 @@ export async function getProducts() {
 }
 
 
+export async function addNftWithId(nft, id) {
+    try {
+        const imageUrl = await uploadFile(file.name, file, 'nfts');
+
+        await setDoc(doc(db, "nfts", id), {
+            ...nft,
+            url: imageUrl
+        });
+    } catch (e) {
+        console.error("Error adding document: ", e);
+    }
+}
+
+export async function addNft(nft) {
+    try {
+        const docRef = await addDoc(collection(db, "nfts"), nft);
+
+        console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+        console.error("Error adding document: ", e);
+    }
+}
+
+
+
+export async function shoppingCartCheck(id) {
+
+    await updateDoc(id, {
+        shopping: true
+    });
+}
+
+export async function shoppingCartNoCheck(id) {
+    await updateDoc(id, {
+        shopping: false,
+    });
+}
+
+/*export async function editComments(id) {
+    await setDoc(doc(db, "nfts", id), {
+        completed: false,
+    });
+}*/
 
 // async function getData() {
 //     try {

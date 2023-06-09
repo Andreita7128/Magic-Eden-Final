@@ -1,3 +1,6 @@
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { db } from "./firebase.js";
+import { collection, addDoc } from "firebase/firestore";
 console.log('this is the homepage')
 const home = document.querySelector('.home');
 const nftlist = document.querySelector('.nft-list');
@@ -7,6 +10,7 @@ const carousel = document.querySelector('.twitter-carousel');
 //const comment = carousel.querySelectorAll('.comment');
 /*
 let index = 0;
+
 let interval = setInterval(() => {
   comment[index].style.opacity = 0;
   index++;
@@ -15,14 +19,18 @@ let interval = setInterval(() => {
   }
   comment[index].style.opacity = 1;
 }, 2000);
-*/
 
+*/
 function setButtons() {
   const buttonHome = document.querySelector('.home-button')
   const buttonNftList = document.querySelector('.nft-list-button')
+
+
   console.log(buttonNftList);
+
   buttonHome?.addEventListener('click', ()=> goToHome())
   buttonNftList?.addEventListener('click', ()=> goToNftList())
+  
 
 }
 function goToHome() {
@@ -36,13 +44,12 @@ function goToNftList() {
   setButtons()
 }
 
-// Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase
-// Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase 
-// Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase
-
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-import { db } from "./firebase.js";
-import { collection, addDoc } from "firebase/firestore";
+// Attach a click event listener to the button
+const button = document.getElementById('navigate-button');
+button.addEventListener('click', () => {
+  // Navigate to the new page
+  window.location.href = 'addNFT.html';
+});
 
 const authInstance = getAuth();
 

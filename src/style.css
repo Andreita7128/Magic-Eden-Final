@@ -899,3 +899,32 @@ button {
     color: white;
     text-align: center;
 }
+
+.btn-shopping-view {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-top: 40px;
+    width: auto;
+    height: auto;
+    background-color: #120C18;
+    align-self: center;
+    border-radius: 20px;
+    padding: 5px 6%;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    border: 2px solid white;
+}
+
+.btn-view {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.title-shopping {
+    color: white;
+}
