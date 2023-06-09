@@ -45,11 +45,6 @@ function goToNftList() {
 }
 
 // Attach a click event listener to the button
-const button = document.getElementById('navigate-button');
-button.addEventListener('click', () => {
-  // Navigate to the new page
-  window.location.href = 'addNFT.html';
-});
 
 const authInstance = getAuth();
 
@@ -57,15 +52,21 @@ const authInstance = getAuth();
 const loginForm = document.getElementById('login-form');
 loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
-
+  
   const email = document.getElementById('login-email-input').value;
   const password = document.getElementById('login-password-input').value;
-
+  
   signInWithEmailAndPassword(authInstance, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      console.log('Usuario autenticado:', user);
-      // Realizar cualquier acción adicional después de iniciar sesión
+  .then((userCredential) => {
+    const user = userCredential.user;
+    console.log('Usuario autenticado:', user);
+    // Realizar cualquier acción adicional después de iniciar sesión
+    const button = document.getElementById('navigate-button');
+    button.addEventListener('click', () => {
+      // Navigate to the new page
+      window.location.href = 'addNFT.html';
+    });
+
     })
     .catch((error) => {
       console.error('Hay un error', error);
