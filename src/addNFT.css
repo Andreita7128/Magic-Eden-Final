@@ -1,0 +1,33 @@
+.hidden {
+    display: none;
+}
+
+* {
+    margin: 2%;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Be Vietnam Pro', sans-serif;
+
+}
+
+body {
+    background-color: #120C18 !important;
+    color: aliceblue;
+
+}
+
+main {
+    height: 2184px;
+    background-color: #120C18;
+}
+.title-add{
+    margin: 25px 20px 0px 0px;
+    color: aliceblue;
+}
+.label-input{
+    color: #E42575;
+    margin: 25px 20px 0px 0px;
+}
+.btn-add{
+    margin: 20px;
+}

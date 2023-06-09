@@ -7,6 +7,7 @@ const carousel = document.querySelector('.twitter-carousel');
 //const comment = carousel.querySelectorAll('.comment');
 /*
 let index = 0;
+
 let interval = setInterval(() => {
   comment[index].style.opacity = 0;
   index++;
@@ -15,14 +16,18 @@ let interval = setInterval(() => {
   }
   comment[index].style.opacity = 1;
 }, 2000);
-*/
 
+*/
 function setButtons() {
   const buttonHome = document.querySelector('.home-button')
   const buttonNftList = document.querySelector('.nft-list-button')
+
+
   console.log(buttonNftList);
+
   buttonHome?.addEventListener('click', ()=> goToHome())
   buttonNftList?.addEventListener('click', ()=> goToNftList())
+  
 
 }
 function goToHome() {
@@ -35,4 +40,12 @@ function goToNftList() {
   home.classList.add('hidden')
   setButtons()
 }
+
+// Attach a click event listener to the button
+const button = document.getElementById('navigate-button');
+button.addEventListener('click', () => {
+  // Navigate to the new page
+  window.location.href = 'addNFT.html';
+});
+
 

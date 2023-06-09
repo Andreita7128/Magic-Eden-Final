@@ -1,7 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from 'firebase/firestore';
-import { collection, addDoc } from "firebase/firestore";
+import { getFirestore, collection, addDoc, doc, setDoc, getDocs } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -19,18 +20,38 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const storage = getStorage(app)
 
 
+export async function getNfts() {
+    const allNfts = [];
 
-// async function getData() {
-//     try {
-//         const response = await fetch('https://magic-eden-nfts-default-rtdb.firebaseio.com/products.json');
-//         const data = await response.json();
-//         data.map(elem => {
-//             const docRef = addDoc(collection(db, "nfts"), elem);
-//         });
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }
-//getData()
+    const querySnapshot = await getDocs(collection(db, "nfts"));
+    querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} => ${doc.data()}`);
+        allNfts.push({...doc.data(), id: doc.id });
+    });
+
+    return allNfts;
+}
+
+export async function addNft(nft) {
+    try {
+        const docRef = await addDoc(collection(db, "nfts"), nft);
+
+        console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+        console.error("Error adding document: ", e);
+    }
+}
+
+export async function addNftWithId(nft, id) {
+    try {
+        const imageUrl = await uploadFile(file.name, file, 'nfts');
+
+        await setDoc(doc(db, "nfts", id), {...nft, url: imageUrl });
+    } catch (e) {
+        console.error("Error adding document: ", e);
+    }
+}
+
