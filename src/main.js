@@ -36,3 +36,69 @@ function goToNftList() {
   setButtons()
 }
 
+// Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase
+// Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase 
+// Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase Firebase
+
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { db } from "./firebase.js";
+import { collection, addDoc } from "firebase/firestore";
+
+const authInstance = getAuth();
+
+// Evento para iniciar sesión
+const loginForm = document.getElementById('login-form');
+loginForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById('login-email-input').value;
+  const password = document.getElementById('login-password-input').value;
+
+  signInWithEmailAndPassword(authInstance, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log('Usuario autenticado:', user);
+      // Realizar cualquier acción adicional después de iniciar sesión
+    })
+    .catch((error) => {
+      console.error('Hay un error', error);
+    });
+});
+
+const registerForm = document.getElementById("register-form");
+const emailInput = document.getElementById("register-email-input");
+const passwordInput = document.getElementById("register-password-input");
+const birthdateInput = document.getElementById("birthdate-input");
+const profilePicInput = document.getElementById("profile-pic-input");
+const roleSelect = document.getElementById("register-role-input");
+
+registerForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = emailInput.value;
+  const password = passwordInput.value;
+  const birthdate = birthdateInput.value;
+  const profilePic = profilePicInput.files[0];
+  const role = roleSelect.value;
+
+  try {
+    const userCredential = await createUserWithEmailAndPassword(authInstance, email, password);
+    const user = userCredential.user;
+
+    const userData = {
+      email: email,
+      birthdate: birthdate,
+      role: role
+    };
+
+    const docRef = await addDoc(collection(db, "users"), userData);
+    
+    registerForm.reset();
+    alert("Cuenta creada exitosamente");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+
+
