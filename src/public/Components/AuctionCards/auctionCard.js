@@ -4,7 +4,6 @@ export class AuctionCard extends HTMLElement {
     this.nfts = [];
     this.filteredNfts = [];
   }
-
   connectedCallback() {
     this.filterButtons = document.querySelectorAll('.filter-button');
     this.collectionSelect = document.querySelectorAll('.collection-dropdown');
@@ -25,22 +24,45 @@ export class AuctionCard extends HTMLElement {
     try {
       const response = await fetch('https://magic-eden-nfts-default-rtdb.firebaseio.com/products.json');
       const data = await response.json();
+
       this.nfts = Object.values(data);
-      this.filteredNfts = [...this.nfts]
-      console.log(this.filteredNfts)
+     this.filteredNfts = [...this.nfts]
+
+      //get the dropdown element
+      const dropdownCollection= document.getElementById('collection')
+     // Filter out duplicate options
+    const uniqueOptions = this.filteredNfts.filter(
+      (option, index, self) =>
+        index === self.findIndex((o) => o.collection === option.collection)
+    );
+
+      //iterate over the options and create <option> elements
+      uniqueOptions.forEach(option =>{
+        const optionELement = document.createElement('option')
+        const array = option.collection
+       // console.log(array)
+        optionELement.value = array
+       // console.log(optionELement)
+        optionELement.textContent = array;
+        console.log(optionELement.textContent)
+
+        //append the option to the dropdown
+        dropdownCollection.appendChild(optionELement)
+      })
+      //console.log( this.filteredNfts)
       this.renderCards(this.filteredNfts);
     } catch (error) {
       console.error(error);
     }
-    /*
-    getData() {
-      const card = document.querySelector('.auction-card');
-      if (card) {
-        const bidButton = card.querySelector('.bid-button');
-        bidButton.addEventListener('click', this.handleBidButtonClick);
-      }
-    }
-    */
+/*
+getData() {
+  const card = document.querySelector('.auction-card');
+  if (card) {
+    const bidButton = card.querySelector('.bid-button');
+    bidButton.addEventListener('click', this.handleBidButtonClick);
+  }
+}
+*/
     this.filterButtons.forEach((button) => {
       button.addEventListener('click', () => {
         this.filterButtons.forEach((button) => button.classList.remove('active'));
@@ -51,22 +73,26 @@ export class AuctionCard extends HTMLElement {
     });
 
     //escucha las opciones de las colecciones
-    console.log(this.collectionSelect)
-    this.collectionSelect.forEach(dropdown => {
-      dropdown.addEventListener('click', async () => {
-        const category = dropdown.getAttribute('data-category');
-        const priceRange = document.querySelector('.price-dropdown.active').getAttribute('value');
-        const products = await fetchProducts(category, priceRange);
-        updateProductCards(products);
-      });
-    });
     /*
-     this.collectionFilter.addEventListener("click", () => {
-       const selectedCollection = this.collectionFilter.dataset.category;
-       const filteredData = filterByCollection(this.filteredNfts, selectedCollection);
-       renderCards(filteredData);
-     });
-     */
+   console.log(this.collectionSelect)
+   this.collectionSelect.forEach(dropdown => {
+    dropdown.addEventListener('click', async () => {
+      const category = dropdown.getAttribute('data-category');
+      const priceRange = document.querySelector('.price-dropdown.active').getAttribute('value');
+      const products = await fetchProducts(category, priceRange);
+      updateProductCards(products);
+    });
+  });
+  */
+
+
+   /*
+    this.collectionFilter.addEventListener("click", () => {
+      const selectedCollection = this.collectionFilter.dataset.category;
+      const filteredData = filterByCollection(this.filteredNfts, selectedCollection);
+      renderCards(filteredData);
+    });
+    */
     /*
     this.collectionSelect.options.forEach((drop) => {
       drop.addEventListener('change', () => {
@@ -76,21 +102,22 @@ export class AuctionCard extends HTMLElement {
       });
     });*/
 
-    /*
-        this.collectionSelect.addEventListener('change', () => {
-          const selectedCollection = this.collectionSelect.value;
-          this.filterByCollection(selectedCollection);
-        });
-    
-    */
-    //escucha las opciones del rango de precio
+
+    this.dropdownCollection.addEventListener('change', () => {
+      const selectedCollection = this.dropdownCollection.uniqueOptions[dropdownCollection.selectedIndex]
+      console.log('selected value: ', selectedCollection.collection)
+     // this.filterByCollection(selectedCollection);
+    });
+
+
+//escucha las opciones del rango de precio
     this.priceSelect.addEventListener('change', () => {
       const selectedPriceRange = this.priceSelect.value;
       this.filterByPriceRange(selectedPriceRange);
     });
-
+  
   }
-
+/*
   filterByCollection(data, collection) {
     if (collection === "all") {
       return data;
@@ -98,8 +125,7 @@ export class AuctionCard extends HTMLElement {
       return data.filter(item => item.collection === collection);
     }
   }
-
-
+  */
   renderCards(products) {
     console.log('rendering');
     // Set to default the html content to empty, then render everything up
@@ -109,10 +135,7 @@ export class AuctionCard extends HTMLElement {
     const cardContainer = document.createElement('div');
     cardContainer.classList.add('auction-container');
     this.appendChild(cardContainer);
-    products.forEach((nft, index) => {
-      let url = "./infoNFT.html?id=" + index;
-      const link = document.createElement('a')
-      link.href = url;
+    products.forEach(nft => {
       const card = document.createElement('div');
       card.classList.add('card');
 
@@ -136,19 +159,22 @@ export class AuctionCard extends HTMLElement {
       card.appendChild(nftName);
       card.appendChild(collectionName);
       card.appendChild(priceElement);
-      link.appendChild(card)
-      cardContainer.appendChild(link);
-
-
+      cardContainer.appendChild(card);
+      
     });
   }
 
-
+  
   filterByCryptocurrency(crypto) {
     return this.nfts.filter(n => n.cryptocurrency === crypto);
+    console.log()
+  }
+  filterByCollection(collect){
+    this.nfts.filter(n=> n.collection === collect)
   }
 
   //filtrado de la colección
+  /*
   filterByCollection(collection) {
     if (collection === 'all') {
       this.filteredNfts = [...this.nfts];
@@ -163,55 +189,7 @@ export class AuctionCard extends HTMLElement {
       this.filterProducts(selectedCategory);
     }
   }
-
-
-  /*
-
-filterCollections(name){
-  const nfts = this.nfts
-  console.log(category);
-  console.log(nfts)
-  switch (name) {
-    case 'okay':
-      this.renderCards(this.filterByCollection('okay-bears'));
-      break;
-    case 'block':
-      this.renderCards(this.filterByCollection('blockstars'));
-      break;
-    case 'naka':
-      this.renderCards(this.filterByCollection('nakamigos'));
-      break;
-      case 'soul':
-        this.renderCards(this.filterByCollection('soul-dogs'));
-        break;
-      case 'dao':
-        this.renderCards(this.filterByCollection('viktordao'));
-        break;
-      case 'naka':
-        this.renderCards(this.filterByCollection('node-monkey'));
-        break;
-        case 'block':
-          this.renderCards(this.filterByCollection('mutant-ape'));
-          break;
-        case 'naka':
-          this.renderCards(this.filterByCollection('doodles'));
-          break;
-          case 'soul':
-            this.renderCards(this.filterByCollection('degods'));
-            break;
-          case 'dao':
-            this.renderCards(this.filterByCollection('yoots'));
-            break;
-          case 'naka':
-            this.renderCards(this.filterByCollection('jomohippo'));
-            break;
-    default:
-      this.renderCards(nfts)
-      break;
-  }
-}
 */
-
   //filtrado del precio
 
 
@@ -229,6 +207,9 @@ filterCollections(name){
       case 'btc':
         this.renderCards(this.filterByCryptocurrency('BTC'));
         break;
+      /*case collection:
+        this.renderCards(this.filterByCollection())
+        break;*/
       default:
         this.renderCards(nfts)
         break;
