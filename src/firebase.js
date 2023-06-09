@@ -59,7 +59,6 @@ export async function addData() {
     }
 }
 
-
 export async function addNft(nft) {
     try {
         const docRef = await addDoc(collection(db, "nfts"), nft);
@@ -72,33 +71,22 @@ export async function addNft(nft) {
 
 export async function addNftWithId(nft, id) {
     try {
-        const imageUrl = await uploadFile(file.name, file, 'nfts');
-
-        await setDoc(doc(db, "nfts", id), {...nft, url: imageUrl });
+        await setDoc(doc(collection(db, "nfts"), id.toString()), {...nft});
     } catch (e) {
         console.error("Error adding document: ", e);
     }
 }
+// export async function uploadFile(nft, urlimg, folder) {
+//     const taskImgRef = ref(storage, `${folder}/${name}`);
 
-export async function addNft(nft) {
-    try {
-        const docRef = await addDoc(collection(db, "nfts"), nft);
-
-        console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-        console.error("Error adding document: ", e);
-    }
-}
-
-export async function addNftWithId(nft, id) {
-    try {
-        const imageUrl = await uploadFile(file.name, file, 'nfts');
-
-        await setDoc(doc(db, "nfts", id), {...nft, url: imageUrl });
-    } catch (e) {
-        console.error("Error adding document: ", e);
-    }
-}
+//     try {
+//         await uploadBytes(taskImgRef, urlimg);
+//         const url = await getDownloadURL(taskImgRef);
+//         return url;
+//     } catch (error) {
+//         console.log("error creando imagen ->", error);
+//     }
+// }
 
 // async function getData() {
 //     try {
