@@ -44,11 +44,17 @@
                 <br>
                 <p>Cryptocurrency: </p>
                 <p>Price: </p>
+                <div class="btn-shopping" id="shopping-cart">
+                    <i class="bi bi-cart2"></i> <p>Añadir al carrito de compras</p>
+                </div>
             </div>
-
         </div>
     </article>
-
+    <section class="btn-view">
+        <a href="./shopping-cart/index.html" class="btn-shopping-view" id="shopping-cart">
+            <i class="bi bi-cart2"></i> <p>Ver carrito de compras</p>
+        </a>
+    </section>
     <button class="next-btn">Ver siguiente</button>
     <script type="module">
         // import dataComments from "./public/Components/Comments/dataComment/dataComment.js";
@@ -81,7 +87,7 @@
         function updateProductInfo() {
             const product = products[position];
             const productName = document.querySelector('.product-descripcion h2');
-           // productName.innerText = product.name;
+            productName.innerText = product.name;
             const productCollection = document.querySelector('.product-descripcion h2:last-of-type');
             productCollection.innerText = product.collection;
             const productImg = document.querySelector('.product-img');
@@ -90,26 +96,6 @@
             productDesc.item(0).innerText = product.description;
             productDesc.item(1).innerText = product.cryptocurrency;
             productDesc.item(2).innerText = product.price;
-
-            //Andrea
-            //let commentas = document.getElementById("comments")
-            //commentas.innerHTML = ""
-
-            /*product.comments.forEach((com) => {
-                    commentas.innerHTML += ` 
-                    <comments-product pictureprofile="${com.picture}" userName="${com.name}" likes="${com.likes}"
-                    comment="${com.comment}"
-                    ></comments-product>`
-
-
-            if (product.comments !== 'null') {
-                renderComments();
-    
-            } else {
-               commentas.innerHTML += ` 
-                    <comments-product></comments-product>`
-                    
-            }*/
 
         }
 
@@ -122,7 +108,7 @@
             updateProductInfo();
         });
 
-       // getInfo();
+        getInfo();
     </script>
 
     <section id="comments">

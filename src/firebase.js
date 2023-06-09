@@ -2,13 +2,24 @@ import {
     initializeApp
 } from "firebase/app";
 import {
-    getFirestore, collection, addDoc, doc, setDoc, getDocs
+    getFirestore,
+    collection,
+    addDoc,
+    doc,
+    setDoc,
+    getDocs,
+    updateDoc
 } from "firebase/firestore";
 import {
     getAuth,
     onAuthStateChanged
 } from 'firebase/auth';
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {
+    getStorage,
+    ref,
+    uploadBytes,
+    getDownloadURL
+} from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDMoTrnEveh71kOKABSkPmTnyYv-YLyPTk",
@@ -46,14 +57,15 @@ export async function getProducts() {
     return allNfts
 }
 
-export async function addData() {
+
+export async function addNftWithId(nft, id) {
     try {
-        const docRef = await addDoc(collection(db, "users"), {
-            first: "Ada",
-            last: "Lovelace",
-            born: 1815
+        const imageUrl = await uploadFile(file.name, file, 'nfts');
+
+        await setDoc(doc(db, "nfts", id), {
+            ...nft,
+            url: imageUrl
         });
-        console.log("Document written with ID: ", docRef.id);
     } catch (e) {
         console.error("Error adding document: ", e);
     }
@@ -69,24 +81,32 @@ export async function addNft(nft) {
     }
 }
 
-export async function addNftWithId(nft, id) {
-    try {
-        await setDoc(doc(collection(db, "nfts"), id.toString()), {...nft});
-    } catch (e) {
-        console.error("Error adding document: ", e);
-    }
+
+
+
+export async function shoppingCartCheck(id) {
+
+    await updateDoc(id, {
+        shopping: true
+    });
+  
 }
 // export async function uploadFile(nft, urlimg, folder) {
 //     const taskImgRef = ref(storage, `${folder}/${name}`);
 
-//     try {
-//         await uploadBytes(taskImgRef, urlimg);
-//         const url = await getDownloadURL(taskImgRef);
-//         return url;
-//     } catch (error) {
-//         console.log("error creando imagen ->", error);
-//     }
-// }
+
+export async function shoppingCartNoCheck(id) {
+    await updateDoc(id, {
+        shopping: false,
+    });
+}
+
+
+/*export async function editComments(id) {
+    await setDoc(doc(db, "nfts", id), {
+        completed: false,
+    });
+}*/
 
 // async function getData() {
 //     try {
