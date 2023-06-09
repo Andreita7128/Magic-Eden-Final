@@ -17,10 +17,12 @@ const priceInput = document.getElementById('price-input')
 const urlInput = document.getElementById('url-input')
 const submitbtn = document.getElementById('submit-btn')
 
+
+
 submitbtn.addEventListener('click', (e) => uploadNft(e))
 
 async function retrieveNfts() {
-products = await getNfts()
+products = await getProducts()
 }
 
 function renderNfts() {

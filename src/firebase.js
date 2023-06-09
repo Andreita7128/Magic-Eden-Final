@@ -83,18 +83,24 @@ export async function addNft(nft) {
 
 
 
+
 export async function shoppingCartCheck(id) {
 
     await updateDoc(id, {
         shopping: true
     });
+  
 }
+// export async function uploadFile(nft, urlimg, folder) {
+//     const taskImgRef = ref(storage, `${folder}/${name}`);
+
 
 export async function shoppingCartNoCheck(id) {
     await updateDoc(id, {
         shopping: false,
     });
 }
+
 
 /*export async function editComments(id) {
     await setDoc(doc(db, "nfts", id), {
