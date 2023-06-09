@@ -33,38 +33,11 @@
         <button class="filter-button" data-category="eth">Eth</button>
         <button class="filter-button" data-category="btc">Btc</button>
     </div> 
-    <div class="dropdowns">
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Collection
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item active collection-dropdown" href="#" data-category="all">All</a>
-          <a class="dropdown-item collection-dropdown" href="#" data-category="okay-bears">Okay Bears</a>
-          <a class="dropdown-item collection-dropdown"  href="#"data-category="blockstars">Blockstars</a>
-          <a class="dropdown-item collection-dropdown" href="#"data-category="nakamigos">Nakamigos</a>
-          <a class="dropdown-item collection-dropdown" href="#"data-category="soul-dogs">Soul Dogs</a>
-          <a class="dropdown-item collection-dropdown" href="#"data-category="viktordao">ViktorDAO</a>
-          <a class="dropdown-item collection-dropdown" href="#"data-category="node-monkey">Node Monkey</a>
-          <a class="dropdown-item collection-dropdown" href="#"data-category="mutant-ape">Mutant Ape</a>
-          <a class="dropdown-item collection-dropdown" href="#"data-category="doodles">Doodles</a>
-          <a class="dropdown-item collection-dropdown" href="#"data-category="degods">DeGods</a>
-          <a class="dropdown-item collection-dropdown" href="#"data-category="yoots">yoots</a>
-          <a class="dropdown-item collection-dropdown" href="#"data-category="jomohippo">JOMOhippo</a>
-        </div>
-      </div>
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Price range
-        </button>okay
-        <div class="dropdown-menu"  aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item active" class="price-dropdown"href="#" data-category="all">All</a>
-          <a value="0-100" class="dropdown-item" class="price-dropdown"href="#" >0 - 100</a>
-          <a value="100-200" class="dropdown-item" class="price-dropdown"href="#">100 - 200</a>
-          <a value="w00-500" class="dropdown-item" class="price-dropdown"href="#">200 - 500</a>
-        </div>
-      </div>
-    </div>
+
+    <select id="collection">
+      <option id="textOption" value="">Select a collection</option>
+    </select>
+    
     <auction-card></auction-card>
 
     <footer>
