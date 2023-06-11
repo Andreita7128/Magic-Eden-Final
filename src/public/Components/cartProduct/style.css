@@ -112,4 +112,23 @@ img {
 .product_info_total p {
   margin: 0;
   color: white;
+}
+
+@media only screen and (max-width: 768px) {
+  #container-product {
+    flex-direction: column;
+  }
+  #container-product img {
+    width: 100%;
+    border-radius: 20px 20px 0px 0px;
+  }
+  .product_info {
+    flex-direction: column;
+    padding: 10px 6%;
+    align-items: start;
+    gap: 10px;
+  }
+  .product_info_amount {
+    width: 100%;
+  }
 }/*# sourceMappingURL=style.css.map */
