@@ -1,34 +1,57 @@
 import {
-    getProducts,
-    shoppingCartNoCheck
+    getProductsShoppingCart,
+    deleteProductCart
 } from '../firebase'
 
-let nfts = [];
-await retrieveNft();
-renderComments();
+let productsCart = [];
+await retrieveProductsCart();
+renderProducts();
 
-async function retrieveNft() {
-
-    nfts = await getProducts();
-    console.log(nfts);
+async function retrieveProductsCart() {
+    productsCart = await getProductsShoppingCart();
 }
 
-function renderComments(id) {
+function renderProducts() {
 
-    for (let i = 0; i < nfts.length; i++) {
-        const element = nfts[i];
+    const container = document.getElementById('container-shopping');
+    container.textContent = '';
 
-        if (element === id) {
-            const container = document.getElementById('container-shopping');
 
-            container.innerHTML = `
-            `
+    if (productsCart.length > 0) {
 
-            const elem = document.createElement('h2');
-            elem.textContent = element.name;
+        for (let i = 0; i < productsCart.length; i++) {
+            const product = productsCart[i];
 
-            container.append(elem);
+            console.log(product);
+            
+            const component = document.createElement('product-cart');
+            console.log(product.cryptocurrency);
+
+            component.setAttribute('picture', product.url);
+            component.setAttribute('name', product.name);
+            component.setAttribute('collection', product.collection);
+            component.setAttribute('crypto', product.cryptocurrency);
+            component.setAttribute('price', product.price);
+
+            container.appendChild(component);
         }
+    } else {
+        const component = document.createElement('product-cart');
+        console.log('hh');
+        container.appendChild(component);
     }
 
+
+
+}
+
+function deleteProduct() {
+    const btnTrash = document.getElementById('btn-trash');
+
+    btnTrash.addEventListener('click', async () => {
+        productsCart.forEach((product) => {
+            if(product.name){}
+        })
+        await deleteProductCart()
+    })
 }

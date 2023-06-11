@@ -16,8 +16,8 @@ class Comment extends HTMLElement {
         this.comment = this.getAttribute('comment');
         this.likes = this.getAttribute('likes');
 
-
-        if (this.name === '') {
+        console.log(this.name);
+        if (this.name === null) {
             this.renderEmpty();
         } else {
             this.render()

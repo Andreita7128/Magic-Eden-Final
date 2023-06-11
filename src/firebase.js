@@ -8,7 +8,8 @@ import {
     doc,
     setDoc,
     getDocs,
-    updateDoc
+    updateDoc,
+    deleteDoc
 } from "firebase/firestore";
 import {
     getAuth,
@@ -47,7 +48,6 @@ export async function getProducts() {
 
     const querySnapshot = await getDocs(collection(db, "nfts"));
     querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
         allNfts.push({
             ...doc.data(),
             id: doc.id
@@ -55,6 +55,20 @@ export async function getProducts() {
     });
 
     return allNfts
+}
+
+export async function getProductsShoppingCart() {
+    const allCart = [];
+
+    const querySnapshot = await getDocs(collection(db, "shoppingCart"));
+    querySnapshot.forEach((doc) => {
+        allCart.push({
+            ...doc.data(),
+            id: doc.id
+        })
+    });
+
+    return allCart
 }
 
 
@@ -84,21 +98,25 @@ export async function addNft(nft) {
 
 
 
-export async function shoppingCartCheck(id) {
+export async function shoppingCartCheck(product) {
 
-    await updateDoc(id, {
-        shopping: true
-    });
-  
+    try {
+        const docRef = await addDoc(collection(db, "shoppingCart"), product);
+
+        console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+        console.error("Error adding document: ", e);
+    }
 }
-// export async function uploadFile(nft, urlimg, folder) {
-//     const taskImgRef = ref(storage, `${folder}/${name}`);
 
-
-export async function shoppingCartNoCheck(id) {
-    await updateDoc(id, {
-        shopping: false,
-    });
+export async function deleteProductCart(id){
+    try {
+        await deleteDoc(doc(db, 'shoppingCart', id));
+        window.alert('Has eliminado correctamente este elemento de tu carrito')
+    } catch (e) {
+        console.error("Error delete document: ", e);
+        window.alert("Lo sentimos, pero no hemos logrado eliminar correctamente este producto de tu carrito, por favor intentalo de nuevo");
+    }
 }
 
 

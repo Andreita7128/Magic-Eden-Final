@@ -928,3 +928,10 @@ button {
 .title-shopping {
     color: white;
 }
+
+#container-shopping {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 50px;
+}

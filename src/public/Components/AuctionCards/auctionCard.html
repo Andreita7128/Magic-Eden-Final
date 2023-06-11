@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,10 +20,11 @@
 
 <body>
     <script>
-        $(document).ready(function(){
-          $(".dropdown-toggle").dropdown();
+        $(document).ready(function () {
+            $(".dropdown-toggle").dropdown();
         });
-        </script>
+    </script>
+    
     <header>
         <magic-nav></magic-nav>
     </header>
@@ -32,12 +34,12 @@
         <button class="filter-button" data-category="sol">Sol</button>
         <button class="filter-button" data-category="eth">Eth</button>
         <button class="filter-button" data-category="btc">Btc</button>
-    </div> 
+    </div>
 
     <select id="collection">
-      <option id="textOption" value="">Select a collection</option>
+        <option id="textOption" value="">Select a collection</option>
     </select>
-    
+
     <auction-card></auction-card>
 
     <footer>
@@ -45,7 +47,7 @@
     </footer>
 
 
-    <script type="module" src="auctionCard.js"></script>
-    <script type="module" src="/public/Components/Components.js"></script>
+    <script type="module" src="../Components.js"></script>
 </body>
+
 </html>

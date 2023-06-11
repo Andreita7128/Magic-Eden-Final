@@ -1,43 +1,58 @@
 import {
     getProducts,
-    shoppingCartCheck
+    shoppingCartCheck,
+    getProductsShoppingCart
 } from './firebase.js'
 
 
 let nfts = [];
+let productsCart = [];
+let labelH2;
+let productName;
+let productActual;
 await retrieveNft();
-renderComments('8r2llpJkw8razkC7bgPv');
-addCart('8r2llpJkw8razkC7bgPv');
+await retrieveProductsCart();
+renderComments();
+addCart();
+updateComments()
 
 async function retrieveNft() {
-
     nfts = await getProducts();
-    console.log(nfts);
 }
 
-function renderComments(id) {
+async function retrieveProductsCart() {
+    productsCart = await getProductsShoppingCart();
+}
 
-    const container = document.getElementById('comments');
+
+function renderComments() {
+    labelH2 = document.querySelector('.product-descripcion h2');
+    productName = labelH2.textContent;
+
+    const container = document.getElementById('container-comments');
+    container.textContent = '';
 
     for (let i = 0; i < nfts.length; i++) {
         const element = nfts[i];
 
-        if (element.id === id) {
+        if (element.name === productName) {
+            productActual = element;
             if (element.comments !== 'null') {
-
+                console.log(element.id);
                 for (let i = 0; i < element.comments.length; i++) {
-                    const comment = nfts[i];
+                    const commentActual = element.comments[i];
                     const elem = document.createElement('comments-product');
 
-                    elem.setAttribute('picture', comment.comments[i].picture);
-                    elem.setAttribute('name', comment.comments[i].name);
-                    elem.setAttribute('comment', comment.comments[i].comment);
-                    elem.setAttribute('likes', comment.comments[i].likes);
+                    elem.setAttribute('picture', commentActual.picture);
+                    elem.setAttribute('name', commentActual.name);
+                    elem.setAttribute('comment', commentActual.comment);
+                    elem.setAttribute('likes', commentActual.likes);
 
                     container.appendChild(elem);
                 }
-            } else {
+            } else if (element.comments === 'null') {
                 const elem = document.createElement('comments-product');
+                console.log('hh');
                 container.appendChild(elem);
             }
         }
@@ -47,11 +62,35 @@ function renderComments(id) {
 
 }
 
-function addCart(id) {
+function addCart() {
     const btn = document.getElementById('shopping-cart');
+
+    btn.addEventListener('click', async () => {
+        console.log(productsCart);
+        if (productsCart.length > 0) {
+
+            productsCart.forEach((product) => {
+                if (productActual.name === product.name) {
+                    window.alert('Ya agregaste este elemento a tu carrito, si quieres más unidades, dirigete a tu carrito de compras y añadelos desde ahí')
+                } else {
+                    shoppingCartCheck(productActual);
+                    window.alert('Tu producto se añadió exitosamente a tu carrito');
+                    retrieveProductsCart();
+                }
+            });
+        } else {
+            shoppingCartCheck(productActual);
+            retrieveProductsCart();
+        }
+    });
+
+}
+
+function updateComments() {
+    const btn = document.getElementById('next-btn');
     console.log(btn);
 
     btn.addEventListener('click', async () => {
-        await shoppingCartCheck(id);
+        await renderComments();
     });
 }

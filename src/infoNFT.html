@@ -44,9 +44,9 @@
                 <br>
                 <p>Cryptocurrency: </p>
                 <p>Price: </p>
-                <div class="btn-shopping" id="shopping-cart">
+                <button class="btn-shopping" id="shopping-cart">
                     <i class="bi bi-cart2"></i> <p>Añadir al carrito de compras</p>
-                </div>
+                </button>
             </div>
         </div>
     </article>
@@ -55,7 +55,7 @@
             <i class="bi bi-cart2"></i> <p>Ver carrito de compras</p>
         </a>
     </section>
-    <button class="next-btn">Ver siguiente</button>
+    <button class="next-btn" id="next-btn">Ver siguiente</button>
     <script type="module">
         // import dataComments from "./public/Components/Comments/dataComment/dataComment.js";
 
@@ -112,8 +112,11 @@
     </script>
 
     <section id="comments">
-        <h2>Comentarios</h2>
+        <h2 style="margin: 20px 3%;">Comentarios</h2>
         <new-comment></new-comment>
+        <div id="container-comments">
+
+        </div>
     </section>
 
     <footer>
