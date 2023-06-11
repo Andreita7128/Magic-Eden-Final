@@ -1,34 +1,49 @@
 import {
-    getProducts,
+    getProductsShoppingCart,
     shoppingCartNoCheck
 } from '../firebase'
 
-let nfts = [];
-await retrieveNft();
-renderComments('8r2llpJkw8razkC7bgPv');
+let productsCart = [];
+await retrieveProductsCart();
+renderProducts();
 
-async function retrieveNft() {
-
-    nfts = await getProducts();
-    console.log(nfts);
+async function retrieveProductsCart() {
+    productsCart = await getProductsShoppingCart();
 }
 
-function renderComments(id) {
+function renderProducts() {
 
-    for (let i = 0; i < nfts.length; i++) {
-        const element = nfts[i];
+    for (let i = 0; i < productsCart.length; i++) {
+        const element = productsCart[i];
+        const container = document.getElementById('container-shopping');
 
-        if (element === id) {
-            const container = document.getElementById('container-shopping');
+        container.innerHTML = '';
 
-            container.innerHTML = `
-            `
+        productsCart.forEach((product) => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            const nftImage = document.createElement('img');
+            nftImage.classList.add('card__nftImage');
+            nftImage.src = product.url;
 
-            const elem = document.createElement('h2');
-            elem.textContent = element.name;
+            const nftName = document.createElement('h1');
+            nftName.classList.add('card__nftName');
+            nftName.textContent = product.name;
 
-            container.append(elem);
-        }
+            const collectionName = document.createElement('h2');
+            collectionName.classList.add('card__collectionName');
+            collectionName.textContent = product.collection;
+
+            const priceElement = document.createElement('p');
+            priceElement.classList.add('card__price');
+            priceElement.textContent = `${product.price} ${product.cryptocurrency}`;
+
+            card.appendChild(nftImage);
+            card.appendChild(nftName);
+            card.appendChild(collectionName);
+            card.appendChild(priceElement);
+            container.appendChild(card);
+        })
     }
 
 }

@@ -162,6 +162,7 @@ getData() {
       cardContainer.appendChild(card);
       
     });
+    
   }
 
   

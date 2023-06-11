@@ -47,7 +47,6 @@ export async function getProducts() {
 
     const querySnapshot = await getDocs(collection(db, "nfts"));
     querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
         allNfts.push({
             ...doc.data(),
             id: doc.id
@@ -55,6 +54,20 @@ export async function getProducts() {
     });
 
     return allNfts
+}
+
+export async function getProductsShoppingCart() {
+    const allCart = [];
+
+    const querySnapshot = await getDocs(collection(db, "shoppingCart"));
+    querySnapshot.forEach((doc) => {
+        allCart.push({
+            ...doc.data(),
+            id: doc.id
+        })
+    });
+
+    return allCart
 }
 
 
@@ -84,15 +97,16 @@ export async function addNft(nft) {
 
 
 
-export async function shoppingCartCheck(id) {
+export async function shoppingCartCheck(product) {
 
-    await updateDoc(id, {
-        shopping: true
-    });
-  
+    try {
+        const docRef = await addDoc(collection(db, "shoppingCart"), product);
+
+        console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+        console.error("Error adding document: ", e);
+    }
 }
-// export async function uploadFile(nft, urlimg, folder) {
-//     const taskImgRef = ref(storage, `${folder}/${name}`);
 
 
 export async function shoppingCartNoCheck(id) {
