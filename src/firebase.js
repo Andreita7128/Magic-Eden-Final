@@ -8,7 +8,8 @@ import {
     doc,
     setDoc,
     getDocs,
-    updateDoc
+    updateDoc,
+    deleteDoc
 } from "firebase/firestore";
 import {
     getAuth,
@@ -108,11 +109,14 @@ export async function shoppingCartCheck(product) {
     }
 }
 
-
-export async function shoppingCartNoCheck(id) {
-    await updateDoc(id, {
-        shopping: false,
-    });
+export async function deleteProductCart(id){
+    try {
+        await deleteDoc(doc(db, 'shoppingCart', id));
+        window.alert('Has eliminado correctamente este elemento de tu carrito')
+    } catch (e) {
+        console.error("Error delete document: ", e);
+        window.alert("Lo sentimos, pero no hemos logrado eliminar correctamente este producto de tu carrito, por favor intentalo de nuevo");
+    }
 }
 
 

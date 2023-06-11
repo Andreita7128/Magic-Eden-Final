@@ -1,0 +1,115 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Be Vietnam Pro", sans-serif;
+}
+
+body {
+  background-color: #120C18 !important;
+}
+
+#container-product {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  box-shadow: 0px 4px 14px rgba(83, 70, 87, 0.15);
+  background-color: #120C18;
+  border-radius: 20px;
+}
+#container-product_not {
+  color: white;
+  font-size: 24px;
+  padding: 20px 6%;
+}
+#container-product_not a {
+  text-decoration: none;
+  color: #E42575;
+}
+
+img {
+  display: block;
+  width: 15%;
+  height: 15%;
+  border-radius: 20px 0 0px 20px;
+}
+
+.product_info {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  padding: 10px 2%;
+  justify-content: space-between;
+  align-items: center;
+}
+.product_info_description {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: auto;
+  justify-content: space-between;
+}
+.product_info_description h5 {
+  color: white;
+  margin: 0;
+}
+.product_info_collection {
+  margin: 0;
+  color: #E42575;
+}
+.product_info_cryptocurrency {
+  margin: 0;
+  color: white;
+}
+.product_info_amount {
+  width: 30%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product_info_amount .amount {
+  display: flex;
+  width: auto;
+  height: auto;
+  padding: 0px 7%;
+  margin: 0px 6%;
+  height: auto;
+  background-color: rgb(243, 243, 243);
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+.product_info_amount .amount p {
+  margin: 0;
+  font-size: 20px;
+  color: #120C18;
+}
+.product_info button {
+  border-radius: 5px;
+  padding: 5px 10px;
+  box-shadow: 0px 4px 14px rgba(83, 70, 87, 0.15);
+  background-color: #120C18;
+}
+.product_info button i {
+  color: white;
+  font-size: 16px;
+}
+.product_info_price {
+  width: 15%;
+  color: white;
+  text-align: center;
+  margin: 0;
+}
+.product_info_total {
+  display: flex;
+  flex-direction: row;
+  width: 15%;
+  justify-content: space-between;
+  align-items: center;
+}
+.product_info_total p {
+  margin: 0;
+  color: white;
+}/*# sourceMappingURL=style.css.map */

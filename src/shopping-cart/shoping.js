@@ -1,6 +1,6 @@
 import {
     getProductsShoppingCart,
-    shoppingCartNoCheck
+    deleteProductCart
 } from '../firebase'
 
 let productsCart = [];
@@ -13,37 +13,45 @@ async function retrieveProductsCart() {
 
 function renderProducts() {
 
-    for (let i = 0; i < productsCart.length; i++) {
-        const element = productsCart[i];
-        const container = document.getElementById('container-shopping');
+    const container = document.getElementById('container-shopping');
+    container.textContent = '';
 
-        container.innerHTML = '';
 
-        productsCart.forEach((product) => {
-            const card = document.createElement('div');
-            card.classList.add('card');
-            const nftImage = document.createElement('img');
-            nftImage.classList.add('card__nftImage');
-            nftImage.src = product.url;
+    if (productsCart.length > 0) {
 
-            const nftName = document.createElement('h1');
-            nftName.classList.add('card__nftName');
-            nftName.textContent = product.name;
+        for (let i = 0; i < productsCart.length; i++) {
+            const product = productsCart[i];
 
-            const collectionName = document.createElement('h2');
-            collectionName.classList.add('card__collectionName');
-            collectionName.textContent = product.collection;
+            console.log(product);
+            
+            const component = document.createElement('product-cart');
+            console.log(product.cryptocurrency);
 
-            const priceElement = document.createElement('p');
-            priceElement.classList.add('card__price');
-            priceElement.textContent = `${product.price} ${product.cryptocurrency}`;
+            component.setAttribute('picture', product.url);
+            component.setAttribute('name', product.name);
+            component.setAttribute('collection', product.collection);
+            component.setAttribute('crypto', product.cryptocurrency);
+            component.setAttribute('price', product.price);
 
-            card.appendChild(nftImage);
-            card.appendChild(nftName);
-            card.appendChild(collectionName);
-            card.appendChild(priceElement);
-            container.appendChild(card);
-        })
+            container.appendChild(component);
+        }
+    } else {
+        const component = document.createElement('product-cart');
+        console.log('hh');
+        container.appendChild(component);
     }
 
+
+
+}
+
+function deleteProduct() {
+    const btnTrash = document.getElementById('btn-trash');
+
+    btnTrash.addEventListener('click', async () => {
+        productsCart.forEach((product) => {
+            if(product.name){}
+        })
+        await deleteProductCart()
+    })
 }
