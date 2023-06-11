@@ -5,7 +5,7 @@ import {
 
 let nfts = [];
 await retrieveNft();
-renderComments('8r2llpJkw8razkC7bgPv');
+renderComments();
 
 async function retrieveNft() {
 
